@@ -8,6 +8,7 @@ namespace xUnitRealWorld.Web.Models
 {
     public partial class Product
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -17,5 +18,8 @@ namespace xUnitRealWorld.Web.Models
         public int? Stock { get; set; }
         [Required]
         public string Color { get; set; }
+
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

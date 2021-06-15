@@ -18,7 +18,8 @@ namespace xUnitRealWorld.Web.Models
         }
 
         public virtual DbSet<Product> Products { get; set; }
-        
+        public virtual DbSet<Category> Categories { get; set; }
+
         /*"Data Source=DESKTOP-8UI7HQO; Initial Catalog=xUnitTestDb;" +
         " Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;" +
         "ApplicationIntent=ReadWrite;MultiSubnetFailover=False"*/
@@ -38,6 +39,16 @@ namespace xUnitRealWorld.Web.Models
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
             });
 
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.HasData(new Category {Id = 1, Name = "Qelemler"},
+                    new Category {Id = 2, Name = "Defterler"});
+                entity.ToTable("Category");
+                entity.Property(x => x.Name).HasMaxLength(50);
+                entity.HasMany(x => x.Products).WithOne(x => x.Category)
+                    .HasForeignKey(s => s.CategoryId);
+
+            });
             OnModelCreatingPartial(modelBuilder);
         }
 
