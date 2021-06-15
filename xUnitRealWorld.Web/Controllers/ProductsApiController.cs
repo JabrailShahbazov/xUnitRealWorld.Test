@@ -69,7 +69,7 @@ namespace xUnitRealWorld.Web.Controllers
 
         // DELETE: api/ProductsApi/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<ActionResult<Product>> DeleteProduct(int id)
         {
             var product = await _context.GetById(id);
             if (product == null)
