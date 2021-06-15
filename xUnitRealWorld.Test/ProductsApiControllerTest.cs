@@ -9,6 +9,7 @@ using xUnitRealWorld.Web.Repository;
 using Moq;
 using Xunit;
 using xUnitRealWorld.Web.Controllers;
+using xUnitRealWorld.Web.Helper;
 
 namespace xUnitRealWorld.Test
 {
@@ -17,19 +18,29 @@ namespace xUnitRealWorld.Test
     {
         private readonly Mock<IRepository<Product>> _mockRepo;
         private readonly ProductsApiController _controller;
+        private readonly Helper _helper;
         private readonly List<Product> _products;
         public ProductsApiControllerTest()
         {
             _mockRepo = new Mock<IRepository<Product>>();
             _controller = new ProductsApiController(_mockRepo.Object);
+            _helper = new Helper();
             _products = new List<Product>()
             {
                 new Product(){Id = 1,Color = "Red",Name = "Cup",Price =255,Stock = 23},
                 new Product(){Id = 2,Color = "Blue",Name = "Book",Price =11,Stock = 2},
                 new Product(){Id = 3,Color = "Green",Name = "Pencil",Price =1,Stock = 234},
             };
+        }
 
 
+        [Theory]
+        [InlineData(4, 6,10)]
+        public void Add_SimpleValues_ReturnTotal(int a,int b, int total)
+        {
+            var result = _helper.Add(a, b);
+
+            Assert.Equal(total,result);
         }
 
         [Fact]

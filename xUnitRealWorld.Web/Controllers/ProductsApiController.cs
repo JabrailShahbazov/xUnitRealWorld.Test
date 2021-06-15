@@ -21,6 +21,14 @@ namespace xUnitRealWorld.Web.Controllers
             _context = context;
         }
 
+
+        [HttpGet("{a}/{b}")]
+        public IActionResult Add(int a, int b)
+        {
+            return Ok(new Helper.Helper().Add(a, b));
+
+        }
+
         // GET: api/ProductsApi
         [HttpGet]
         public async Task<IActionResult> GetProducts()
