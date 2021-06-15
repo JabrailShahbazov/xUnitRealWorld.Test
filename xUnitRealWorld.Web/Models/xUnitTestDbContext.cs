@@ -41,8 +41,7 @@ namespace xUnitRealWorld.Web.Models
 
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.HasData(new Category {Id = 1, Name = "Qelemler"},
-                    new Category {Id = 2, Name = "Defterler"});
+                entity.HasData(new Category {Id = 1, Name = "Qelemler"});
                 entity.ToTable("Category");
                 entity.Property(x => x.Name).HasMaxLength(50);
                 entity.HasMany(x => x.Products).WithOne(x => x.Category)

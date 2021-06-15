@@ -11,9 +11,9 @@ using xUnitRealWorld.Web.Models;
 
 namespace xUnitRealWorld.Test
 {
-    public class ProductControllerTestWithInMemory : ProductsControllerTest
+    public class ProductControllerTestWithSqLite : ProductsControllerTest
     {
-        public ProductControllerTestWithInMemory()
+        public ProductControllerTestWithSqLite()
         {
             SetContextOptions(new DbContextOptionsBuilder<xUnitTestDbContext>()
                 .UseInMemoryDatabase("xUnitTestInMemoryDb").Options);
@@ -22,7 +22,7 @@ namespace xUnitRealWorld.Test
         [Fact]
         public async Task Create_ModelValidProduct_ReturnRedirectToActionWithSaveProduct()
         {
-            var newProduct = new Product() { Name = "Qelem330", Price = 234, Stock = 34 ,Color = "Black"};
+            var newProduct = new Product() { Name = "Qelem330", Price = 234, Stock = 34,Color = "Blue"};
 
             using (var context = new xUnitTestDbContext(_contextOptions))
             {
@@ -55,7 +55,7 @@ namespace xUnitRealWorld.Test
                 var category = await context.Categories.FindAsync(categoryId);
 
                 context.Categories.Remove(category);
-                await context.SaveChangesAsync();
+                 await context.SaveChangesAsync();
             }
 
             using (var context = new xUnitTestDbContext(_contextOptions))
